@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jose Angel Granados Perez | Portfolio</title>
 <meta name="description" content="Portfolio de Jose Angel Granados Perez - Desarrollador Software Frontend & Backend">
+<meta name="keywords" content="Jose Angel Granados Perez, desarrollador frontend, desarrollador backend, portfolio, Santa Marta, Colombia, Universidad del Magdalena, JavaScript, Python, TypeScript">
+<meta name="author" content="Jose Angel Granados Perez">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mcangen.github.io/">
+
+<!-- Open Graph / Facebook, LinkedIn, WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jose Angel Granados Perez | Portfolio">
+<meta property="og:description" content="Portfolio de Jose Angel Granados Perez - Desarrollador de Software Frontend & Backend en Santa Marta, Colombia.">
+<meta property="og:image" content="https://mcangen.github.io/assets/perfil.jpg">
+<meta property="og:url" content="https://mcangen.github.io/">
+<meta property="og:locale" content="es_CO">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jose Angel Granados Perez | Portfolio">
+<meta name="twitter:description" content="Portfolio de Jose Angel Granados Perez - Desarrollador de Software Frontend & Backend en Santa Marta, Colombia.">
+<meta name="twitter:image" content="https://mcangen.github.io/assets/perfil.jpg">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='16'%20fill='%230a0a0f'/%3E%3Ctext%20x='9'%20y='43'%20font-family='Arial,Helvetica,sans-serif'%20font-size='28'%20font-weight='800'%20fill='%23f2f2f7'%3EJG%3Ctspan%20fill='%2322d3ee'%3E.%3C/tspan%3E%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.16.0/devicon.min.css">
 
 <style>
@@ -120,14 +140,54 @@
     align-items: center;
   }
 
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   .logo {
     font-weight: 800;
     font-size: 1.15rem;
     letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--text-primary);
+    cursor: pointer;
   }
 
   .logo span {
     color: var(--accent-cyan);
+  }
+
+  .lang-switch {
+    display: flex;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .lang-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 5px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .lang-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .lang-btn.active {
+    background: var(--gradient-main);
+    color: #0a0a0f;
   }
 
   .nav-links {
@@ -337,8 +397,9 @@
      ============================================ */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
+    align-items: start;
   }
 
   .skill-category {
@@ -346,7 +407,11 @@
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 28px;
-    transition: border-color 0.25s ease, transform 0.25s ease;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .skill-category:hover {
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.12);
   }
 
   .skill-category:hover {
@@ -760,8 +825,96 @@
   }
 
   /* ============================================
-     RESPONSIVE
+     BACK TO TOP BUTTON
      ============================================ */
+  .back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 900;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .back-to-top:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.25);
+  }
+
+  .back-to-top svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 480px) {
+    .back-to-top {
+      right: 16px;
+      bottom: 16px;
+    }
+  }
+
+  /* ============================================
+     REVEAL ON SCROLL
+     ============================================ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger: tarjetas de skills (3 por fila) */
+  .skills-grid .reveal:nth-child(1) { transition-delay: 0s; }
+  .skills-grid .reveal:nth-child(2) { transition-delay: 0.1s; }
+  .skills-grid .reveal:nth-child(3) { transition-delay: 0.2s; }
+
+  /* Stagger: tarjetas de formación/experiencia (lista vertical) */
+  .exp-list .reveal:nth-child(1) { transition-delay: 0s; }
+  .exp-list .reveal:nth-child(2) { transition-delay: 0.1s; }
+  .exp-list .reveal:nth-child(3) { transition-delay: 0.2s; }
+  .exp-list .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+  /* Stagger: tarjetas de proyectos (3 por fila en desktop) */
+  .projects-grid .reveal:nth-child(3n+1) { transition-delay: 0s; }
+  .projects-grid .reveal:nth-child(3n+2) { transition-delay: 0.1s; }
+  .projects-grid .reveal:nth-child(3n)   { transition-delay: 0.2s; }
+
+  /* Stagger: línea de tiempo de logros */
+  .timeline .reveal:nth-child(1) { transition-delay: 0s; }
+  .timeline .reveal:nth-child(2) { transition-delay: 0.15s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+    /*RESPONSIVE*/
+     
   @media (max-width: 860px) {
     .projects-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -829,13 +982,19 @@
        ============================================ -->
   <nav class="navbar">
     <div class="nav-inner">
-      <div class="logo">JG<span>.</span></div>
+      <div class="nav-left">
+        <a href="#home" class="logo" aria-label="Ir al inicio">JG<span>.</span></a>
+        <div class="lang-switch" id="langSwitch" role="group" aria-label="Selector de idioma">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#skills">Habilidades</a></li>
-        <li><a href="#experience">Experiencia</a></li>
-        <li><a href="#projects">Proyectos</a></li>
-        <li><a href="#achievements">Logros</a></li>
-        <li><a href="#contact">Contacto</a></li>
+        <li><a href="#skills" data-i18n="nav_skills">Habilidades</a></li>
+        <li><a href="#experience" data-i18n="nav_experience">Experiencia</a></li>
+        <li><a href="#projects" data-i18n="nav_projects">Proyectos</a></li>
+        <li><a href="#achievements" data-i18n="nav_achievements">Logros</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -851,36 +1010,40 @@
       <div class="hero-inner">
 
         <div class="profile-img-wrapper">
-          <img src="assets/perfil.jpg" class="profile-img" alt="Jose Granados">
+          <img data-src="assets/perfil.jpg" class="profile-img" alt="Jose Granados" id="profileImg">
         </div>
 
-        <div class="hero-tag">
+        <!-- <div class="hero-tag">
           <span class="dot"></span>
-          Disponible para proyectos
-        </div>
+          <span data-i18n="hero_available">Disponible para proyectos</span>
+        </div> -->
 
         <h1>Jose Angel <span class="highlight">Granados Perez</span></h1>
 
-        <p class="role">Desarrollador de Software · Frontend & Backend</p>
+        <p class="role" data-i18n="hero_role">Desarrollador de Software · Frontend & Backend</p>
 
         <div class="hero-meta">
           <div class="meta-chip">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.5-4.5-7-8.5-7-12a7 7 0 0 1 14 0c0 3.5-2.5 7.5-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            Santa Marta, Colombia
+            <span data-i18n="hero_location">Santa Marta, Colombia</span>
           </div>
           <div class="meta-chip">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-            19 años
+            <span data-i18n="hero_age">19 años</span>
           </div>
           <div class="meta-chip">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14M5 8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2M5 8v11a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8M9 12h6M9 16h4"/></svg>
-            Español (Nativo) · Inglés (Intermedio)
+            <span data-i18n="hero_langs">Español (Nativo) · Inglés (Intermedio)</span>
           </div>
         </div>
 
         <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">Ver Proyectos</a>
-          <a href="#contact" class="btn btn-outline">Contáctame</a>
+          <a href="#projects" class="btn btn-primary" data-i18n="hero_cta_projects">Ver Proyectos</a>
+          <!-- <a href="assets/CV-Jose-Granados.pdf" download class="btn btn-outline">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            <span data-i18n="hero_cta_resume">Descargar CV</span>
+          </a> -->
+          <a href="#contact" class="btn btn-outline" data-i18n="hero_cta_contact">Contáctame</a>
         </div>
 
       </div>
@@ -892,54 +1055,43 @@
        ============================================ -->
   <section id="skills">
     <div class="container">
-      <h2 class="section-title">Habilidades <span>Técnicas</span></h2>
-      <p class="section-subtitle">Tecnologías y herramientas que uso para construir soluciones de software.</p>
+      <h2 class="section-title reveal" data-i18n-html="skills_title">Habilidades <span>Técnicas</span></h2>
+      <p class="section-subtitle reveal" data-i18n="skills_subtitle">Tecnologías y herramientas que uso para construir soluciones de software.</p>
 
       <div class="skills-grid">
 
-        <div class="skill-category">
+        <div class="skill-category reveal">
           <h3>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            Lenguajes de Programación
+            <span data-i18n="skills_cat_languages">Lenguajes de Programación</span>
           </h3>
           <div class="chip-list">
-            <span class="chip"><i class="dev-icon devicon-javascript-plain colored"></i> JavaScript <span class="level">Intermedio</span></span>
-            <span class="chip"><i class="dev-icon devicon-python-plain colored"></i> Python <span class="level">Intermedio</span></span>
-            <span class="chip"><i class="dev-icon devicon-cplusplus-plain colored"></i> C++ <span class="level">Intermedio</span></span>
-            <span class="chip"><i class="dev-icon devicon-typescript-plain colored"></i> TypeScript <span class="level">Básico-Intermedio</span></span>
+            <span class="chip"><i class="dev-icon devicon-javascript-plain colored"></i> JavaScript <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
+            <span class="chip"><i class="dev-icon devicon-python-plain colored"></i> Python <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
+            <span class="chip"><i class="dev-icon devicon-cplusplus-plain colored"></i> C++ <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
+            <span class="chip"><i class="dev-icon devicon-typescript-plain colored"></i> TypeScript <span class="level" data-i18n="level_basic_intermediate">Básico-Intermedio</span></span>
           </div>
         </div>
 
-        <div class="skill-category">
-          <h3>
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg>
-            Tecnologías Web
-          </h3>
-          <div class="chip-list">
-            <span class="chip"><i class="dev-icon devicon-html5-plain colored"></i> HTML5 <span class="level">Avanzado</span></span>
-            <span class="chip"><i class="dev-icon devicon-css3-plain colored"></i> CSS3 <span class="level">Avanzado</span></span>
-          </div>
-        </div>
-
-        <div class="skill-category">
+        <div class="skill-category reveal">
           <h3>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
-            Backend & Bases de Datos
+            <span data-i18n="skills_cat_backend">Backend & Bases de Datos</span>
           </h3>
           <div class="chip-list">
-            <span class="chip"><i class="dev-icon devicon-nodejs-plain colored"></i> Node.js <span class="level">Intermedio</span></span>
-            <span class="chip"><i class="dev-icon devicon-python-plain colored"></i> Python <span class="level">Intermedio</span></span>
+            <span class="chip"><i class="dev-icon devicon-nodejs-plain colored"></i> Node.js <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
+            <span class="chip"><i class="dev-icon devicon-python-plain colored"></i> Python <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
             <span class="chip"><i class="dev-icon devicon-firebase-plain colored"></i> Firebase</span>
           </div>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-category reveal">
           <h3>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
-            Herramientas
+            <span data-i18n="skills_cat_tools">Herramientas</span>
           </h3>
           <div class="chip-list">
-            <span class="chip"><i class="dev-icon devicon-git-plain colored"></i> Git <span class="level">Medio-Alto</span></span>
+            <span class="chip"><i class="dev-icon devicon-git-plain colored"></i> Git <span class="level" data-i18n="level_mid_high">Medio-Alto</span></span>
             <span class="chip"><span class="ai-icon ai-claude"><svg viewBox="0 0 24 24"><path d="M12 3 4 20h4l1.6-4h4.8L16 20h4L12 3Zm-1 10 1.6-4 1.6 4h-3.2Z"/></svg></span> Claude AI</span>
             <span class="chip"><span class="ai-icon ai-gemini"><svg viewBox="0 0 24 24"><path d="M12 2C12 8 8 12 2 12c6 0 10 4 10 10 0-6 4-10 10-10-6 0-10-4-10-10Z"/></svg></span> Gemini</span>
             <span class="chip"><span class="ai-icon ai-chatgpt"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span> ChatGPT</span>
@@ -955,50 +1107,61 @@
        ============================================ -->
   <section id="experience">
     <div class="container">
-      <h2 class="section-title">Formación <span>& Experiencia</span></h2>
-      <p class="section-subtitle">Mi trayectoria académica y roles desempeñados en el ámbito universitario.</p>
+      <h2 class="section-title reveal" data-i18n-html="experience_title">Formación <span>& Experiencia</span></h2>
+      <p class="section-subtitle reveal" data-i18n="experience_subtitle">Mi trayectoria académica y roles desempeñados en el ámbito universitario.</p>
 
       <div class="exp-list">
 
-        <div class="experience-card">
+        <div class="experience-card reveal">
           <div class="exp-header">
             <div>
-              <div class="exp-role">Monitor Académico de Programación</div>
+              <div class="exp-role" data-i18n="exp_monitor_role">Monitor Académico de Programación</div>
               <div class="exp-org">Universidad del Magdalena</div>
             </div>
             <span class="exp-date">2026-I / 2026-II</span>
           </div>
-          <p class="exp-desc">
+          <p class="exp-desc" data-i18n="exp_monitor_desc">
             Liderazgo de sesiones instructivas de programación, apoyo directo a estudiantes en el desarrollo
             de lógica de programación y resolución de dudas técnicas en distintos lenguajes y paradigmas.
           </p>
         </div>
 
-        
-
-        <div class="experience-card">
+        <div class="experience-card reveal">
           <div class="exp-header">
             <div>
-              <div class="exp-role">Estudiante de Ingeniería Electrónica</div>
+              <div class="exp-role" data-i18n="exp_honor_role">Mención Honorífica</div>
               <div class="exp-org">Universidad del Magdalena</div>
             </div>
-            <span class="exp-date">Desde 2024-II</span>
+            <span class="exp-date">2026-I</span>
           </div>
-          <p class="exp-desc">
+          <p class="exp-desc" data-i18n="exp_honor_desc">
+            Reconocimiento por desempeño académico destacado durante el periodo.
+          </p>
+        </div>
+
+        <div class="experience-card reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role" data-i18n="exp_student_role">Estudiante de Ingeniería Electrónica</div>
+              <div class="exp-org">Universidad del Magdalena</div>
+            </div>
+            <span class="exp-date" data-i18n="exp_student_date">Desde 2024-II</span>
+          </div>
+          <p class="exp-desc" data-i18n="exp_student_desc">
             Ingrese al programa de Ingeniería Electrónica, combinando el aprendizaje de sistemas
             embebidos y hardware con el desarrollo de software.
           </p>
         </div>
 
-        <div class="experience-card">
+        <div class="experience-card reveal">
           <div class="exp-header">
             <div>
-              <div class="exp-role">Técnico en Sistemas</div>
+              <div class="exp-role" data-i18n="exp_sena_role">Técnico en Sistemas</div>
               <div class="exp-org">SENA</div>
             </div>
             <span class="exp-date">2023</span>
           </div>
-          <p class="exp-desc">
+          <p class="exp-desc" data-i18n="exp_sena_desc">
             Título de Técnico en Sistemas, con formación en fundamentos de programación,
             redes y soporte técnico.
           </p>
@@ -1013,113 +1176,113 @@
        ============================================ -->
   <section id="projects">
     <div class="container">
-      <h2 class="section-title">Proyectos <span>Destacados</span></h2>
-      <p class="section-subtitle">Una selección de proyectos personales y académicos en los que he trabajado.</p>
+      <h2 class="section-title reveal" data-i18n-html="projects_title">Proyectos <span>Destacados</span></h2>
+      <p class="section-subtitle reveal" data-i18n="projects_subtitle">Una selección de proyectos personales y académicos en los que he trabajado.</p>
 
       <div class="projects-grid">
 
-        <div class="project-card">
+        <div class="project-card reveal">
           <div class="project-icon">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg>
           </div>
           <h3>Mundo Cracking</h3>
-          <p>Plataforma de enlaces para juegos gratuitos, con una interfaz simple y organizada para acceder a contenido de forma rápida.</p>
+          <p data-i18n="proj_mundocracking_desc">Plataforma de enlaces para juegos gratuitos, con una interfaz simple y organizada para acceder a contenido de forma rápida.</p>
           <div class="tech-tags">
             <span class="tech-tag">HTML</span>
             <span class="tech-tag">CSS</span>
           </div>
           <a href="https://mcangen.github.io/Mundo-Cracking/" target="_blank" class="project-link">
-            Ver proyecto
+            <span data-i18n="link_view_project">Ver proyecto</span>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card reveal">
           <div class="project-icon">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5a3 3 0 0 1 6 0v2M8 12h.01M16 12h.01"/></svg>
           </div>
           <h3>ElectronicControl & GamePlataforms</h3>
-          <p>Sistema embebido en Arduino Pro Micro desarrollado desde cero, junto a un videojuego en Python adaptado especialmente para el control.</p>
+          <p data-i18n="proj_electroniccontrol_desc">Sistema embebido en Arduino Pro Micro desarrollado desde cero, junto a un videojuego en Python adaptado especialmente para el control.</p>
           <div class="tech-tags">
             <span class="tech-tag">C++</span>
             <span class="tech-tag">Python</span>
           </div>
           <div style="display: flex; gap: 5px;">
             <a href="https://github.com/mcangen/ElectronicControl" target="_blank" class="project-link">
-              Ver Control
+              <span data-i18n="link_view_control">Ver Control</span>
               <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
             <a href="https://github.com/mcangen/gamePlataforms" target="_blank" class="project-link">
-              Ver Juego
+              <span data-i18n="link_view_game">Ver Juego</span>
               <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
 
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card reveal">
           <div class="project-icon">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18M3 3v4l7 6v6l4 2v-8l7-6V3"/></svg>
           </div>
           <h3>Inversiones Match</h3>
-          <p>Catálogo interactivo de productos pensado para e-commerce, con navegación clara y presentación visual atractiva.</p>
+          <p data-i18n="proj_inversionesmatch_desc">Catálogo interactivo de productos pensado para e-commerce, con navegación clara y presentación visual atractiva.</p>
           <div class="tech-tags">
             <span class="tech-tag">HTML</span>
             <span class="tech-tag">CSS</span>
           </div>
           <a href="https://github.com/mcangen/InversionesMach" target="_blank" class="project-link">
-            Ver proyecto
+            <span data-i18n="link_view_project">Ver proyecto</span>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card reveal">
           <div class="project-icon">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           </div>
           <h3>HorApprio</h3>
-          <p>Aplicación de gestión de tiempo y calendario académico, diseñada para ayudar a organizar tareas y horarios de estudio.</p>
+          <p data-i18n="proj_horapprio_desc">Aplicación de gestión de tiempo y calendario académico, diseñada para ayudar a organizar tareas y horarios de estudio.</p>
           <div class="tech-tags">
             <span class="tech-tag">HTML</span>
             <span class="tech-tag">CSS</span>
             <span class="tech-tag">JavaScript</span>
           </div>
           <a href="https://mcangen.github.io/Horario/" target="_blank" class="project-link">
-            Ver proyecto
+            <span data-i18n="link_view_project">Ver proyecto</span>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card reveal">
           <div class="project-icon">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
           </div>
           <h3>AgroTrace</h3>
-          <p>Plataforma agrotech enfocada en la trazabilidad de lotes agrícolas, permitiendo un seguimiento claro de la producción.</p>
+          <p data-i18n="proj_agrotrace_desc">Plataforma agrotech enfocada en la trazabilidad de lotes agrícolas, permitiendo un seguimiento claro de la producción.</p>
           <div class="tech-tags">
             <span class="tech-tag">HTML</span>
             <span class="tech-tag">CSS</span>
             <span class="tech-tag">TypeScript</span>
           </div>
           <a href="https://github.com/mcangen/AgroTrace" target="_blank" class="project-link">
-            Ver proyecto
+            <span data-i18n="link_view_project">Ver proyecto</span>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card reveal">
           <div class="project-icon">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
           </div>
           <h3>TelePatin</h3>
-          <p>Sistema web de monitoreo para cohetes hidropulsados, con visualización de datos en tiempo real durante las pruebas.</p>
+          <p data-i18n="proj_telepatin_desc">Sistema web de monitoreo para cohetes hidropulsados, con visualización de datos en tiempo real durante las pruebas.</p>
           <div class="tech-tags">
             <span class="tech-tag">HTML</span>
             <span class="tech-tag">CSS</span>
             <span class="tech-tag">JavaScript</span>
           </div>
           <a href="https://mcangen.github.io/TelePatin/" target="_blank" class="project-link">
-            Ver proyecto
+            <span data-i18n="link_view_project">Ver proyecto</span>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
         </div>
@@ -1133,28 +1296,28 @@
        ============================================ -->
   <section id="achievements">
     <div class="container">
-      <h2 class="section-title">Reconocimientos <span>& Hackathons</span></h2>
-      <p class="section-subtitle">Participación y logros obtenidos en competencias de programación e innovación.</p>
+      <h2 class="section-title reveal" data-i18n-html="achievements_title">Reconocimientos <span>& Hackathons</span></h2>
+      <p class="section-subtitle reveal" data-i18n="achievements_subtitle">Participación y logros obtenidos en competencias de programación e innovación.</p>
 
       <div class="timeline">
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="achievement-card">
             <div class="achievement-header">
               <span class="achievement-title">Col5.0</span>
-              <span class="badge badge-gold"> 2do Puesto</span>
+              <span class="badge badge-gold" data-i18n="badge_2nd_place"> 2do Puesto</span>
             </div>
-            <div class="achievement-date">28 – 29 de Mayo, 2026</div>
+            <div class="achievement-date" data-i18n="date_col50">28 – 29 de Mayo, 2026</div>
           </div>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="achievement-card">
             <div class="achievement-header">
               <span class="achievement-title">Hackathon UniNorte</span>
-              <span class="badge badge-part">Participante</span>
+              <span class="badge badge-part" data-i18n="badge_participant">Participante</span>
             </div>
-            <div class="achievement-date">5 de Junio, 2026</div>
+            <div class="achievement-date" data-i18n="date_uninorte">5 de Junio, 2026</div>
           </div>
         </div>
 
@@ -1167,10 +1330,10 @@
        ============================================ -->
   <section id="contact" class="contact-section">
     <div class="container">
-      <h2 class="section-title">Hablemos <span>de tu Proyecto</span></h2>
-      <p class="section-subtitle">Estoy abierto a nuevas oportunidades, colaboraciones y proyectos interesantes.</p>
+      <h2 class="section-title reveal" data-i18n-html="contact_title">Hablemos <span>de tu Proyecto</span></h2>
+      <p class="section-subtitle reveal" data-i18n="contact_subtitle">Estoy abierto a nuevas oportunidades, colaboraciones y proyectos interesantes.</p>
 
-      <div class="contact-buttons">
+      <div class="contact-buttons reveal">
         <a href="mailto:gjoseangen@gmail.com" class="contact-btn">
           <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
           gjoseangen@gmail.com
@@ -1196,12 +1359,49 @@
        ============================================ -->
   <footer>
     <div class="container">
-      <p>&copy; <span id="year"></span> Jose Angel Granados Perez. Santa Marta, Colombia.</p>
+      <p>&copy; <span id="year"></span> <span id="footerText">Jose Angel Granados Perez. Santa Marta, Colombia.</span></p>
     </div>
   </footer>
 
+  <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
   <script>
-    // Menú móvil
+    // Foto de perfil
+    const profileImg = document.getElementById('profileImg');
+    if (profileImg) {
+      profileImg.src = profileImg.getAttribute('data-src') + '?v=' + Date.now();
+    }
+
+    // Animaciones al hacer scroll 
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && revealEls.length) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+      revealEls.forEach(el => revealObserver.observe(el));
+    } else {
+      // Fallback: si el navegador no soporta IntersectionObserver, mostrar todo
+      revealEls.forEach(el => el.classList.add('visible'));
+    }
+
+
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 500);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
     navToggle.addEventListener('click', () => {
@@ -1211,8 +1411,164 @@
       link.addEventListener('click', () => navLinks.classList.remove('active'));
     });
 
-    // Año dinámico en el footer
+
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    const translations = {
+      es: {
+        page_title: 'Jose Angel Granados Perez | Portfolio',
+        page_description: 'Portfolio de Jose Angel Granados Perez - Desarrollador Software Frontend & Backend',
+        nav_skills: 'Habilidades',
+        nav_experience: 'Experiencia',
+        nav_projects: 'Proyectos',
+        nav_achievements: 'Logros',
+        nav_contact: 'Contacto',
+        hero_available: 'Disponible para proyectos',
+        hero_role: 'Desarrollador de Software · Frontend & Backend',
+        hero_location: 'Santa Marta, Colombia',
+        hero_age: '19 años',
+        hero_langs: 'Español (Nativo) · Inglés (Intermedio)',
+        hero_cta_projects: 'Ver Proyectos',
+        hero_cta_resume: 'Descargar CV',
+        hero_cta_contact: 'Contáctame',
+        skills_title: 'Habilidades <span>Técnicas</span>',
+        skills_subtitle: 'Tecnologías y herramientas que uso para construir soluciones de software.',
+        skills_cat_languages: 'Lenguajes de Programación',
+        skills_cat_backend: 'Backend & Bases de Datos',
+        skills_cat_tools: 'Herramientas',
+        level_intermediate: 'Intermedio',
+        level_basic_intermediate: 'Básico-Intermedio',
+        level_mid_high: 'Medio-Alto',
+        experience_title: 'Formación <span>& Experiencia</span>',
+        experience_subtitle: 'Mi trayectoria académica y roles desempeñados en el ámbito universitario.',
+        exp_monitor_role: 'Monitor Académico de Programación',
+        exp_monitor_desc: 'Liderazgo de sesiones instructivas de programación, apoyo directo a estudiantes en el desarrollo de lógica de programación y resolución de dudas técnicas en distintos lenguajes y paradigmas.',
+        exp_student_role: 'Estudiante de Ingeniería Electrónica',
+        exp_student_date: 'Desde 2024-II',
+        exp_student_desc: 'Ingrese al programa de Ingeniería Electrónica, combinando el aprendizaje de sistemas embebidos y hardware con el desarrollo de software.',
+        exp_honor_role: 'Mención Honorífica',
+        exp_honor_desc: 'Reconocimiento por desempeño académico destacado durante el periodo.',
+        exp_sena_role: 'Técnico en Sistemas',
+        exp_sena_desc: 'Título de Técnico en Sistemas, con formación en fundamentos de programación, redes y soporte técnico.',
+        projects_title: 'Proyectos <span>Destacados</span>',
+        projects_subtitle: 'Una selección de proyectos personales y académicos en los que he trabajado.',
+        proj_mundocracking_desc: 'Plataforma de enlaces para juegos gratuitos, con una interfaz simple y organizada para acceder a contenido de forma rápida.',
+        proj_electroniccontrol_desc: 'Sistema embebido en Arduino Pro Micro desarrollado desde cero, junto a un videojuego en Python adaptado especialmente para el control.',
+        proj_inversionesmatch_desc: 'Catálogo interactivo de productos pensado para e-commerce, con navegación clara y presentación visual atractiva.',
+        proj_horapprio_desc: 'Aplicación de gestión de tiempo y calendario académico, diseñada para ayudar a organizar tareas y horarios de estudio.',
+        proj_agrotrace_desc: 'Plataforma agrotech enfocada en la trazabilidad de lotes agrícolas, permitiendo un seguimiento claro de la producción.',
+        proj_telepatin_desc: 'Sistema web de monitoreo para cohetes hidropulsados, con visualización de datos en tiempo real durante las pruebas.',
+        link_view_project: 'Ver proyecto',
+        link_view_control: 'Ver Control',
+        link_view_game: 'Ver Juego',
+        achievements_title: 'Reconocimientos <span>& Hackathons</span>',
+        achievements_subtitle: 'Participación y logros obtenidos en competencias de programación e innovación.',
+        badge_2nd_place: ' 2do Puesto',
+        date_col50: '28 – 29 de Mayo, 2026',
+        badge_participant: 'Participante',
+        date_uninorte: '5 de Junio, 2026',
+        contact_title: 'Hablemos <span>de tu Proyecto</span>',
+        contact_subtitle: 'Estoy abierto a nuevas oportunidades, colaboraciones y proyectos interesantes.',
+        footer_text: 'Jose Angel Granados Perez. Santa Marta, Colombia.',
+        nav_toggle_aria: 'Abrir menú'
+      },
+      en: {
+        page_title: 'Jose Angel Granados Perez | Portfolio',
+        page_description: 'Portfolio of Jose Angel Granados Perez - Frontend & Backend Software Developer',
+        nav_skills: 'Skills',
+        nav_experience: 'Experience',
+        nav_projects: 'Projects',
+        nav_achievements: 'Achievements',
+        nav_contact: 'Contact',
+        hero_available: 'Available for projects',
+        hero_role: 'Software Developer · Frontend & Backend',
+        hero_location: 'Santa Marta, Colombia',
+        hero_age: '19 years old',
+        hero_langs: 'Spanish (Native) · English (Intermediate)',
+        hero_cta_projects: 'View Projects',
+        hero_cta_resume: 'Download CV',
+        hero_cta_contact: 'Contact Me',
+        skills_title: 'Technical <span>Skills</span>',
+        skills_subtitle: 'Technologies and tools I use to build software solutions.',
+        skills_cat_languages: 'Programming Languages',
+        skills_cat_backend: 'Backend & Databases',
+        skills_cat_tools: 'Tools',
+        level_intermediate: 'Intermediate',
+        level_basic_intermediate: 'Basic-Intermediate',
+        level_mid_high: 'Mid-High',
+        experience_title: 'Education <span>& Experience</span>',
+        experience_subtitle: 'My academic path and roles held within the university.',
+        exp_monitor_role: 'Academic Programming Monitor',
+        exp_monitor_desc: 'Led instructional programming sessions, provided direct support to students in developing programming logic and resolving technical questions across different languages and paradigms.',
+        exp_student_role: 'Electronic Engineering Student',
+        exp_student_date: 'Since 2024-II',
+        exp_student_desc: 'Joined the Electronic Engineering program, combining the study of embedded systems and hardware with software development.',
+        exp_honor_role: 'Honor Roll Recognition',
+        exp_honor_desc: 'Recognized for outstanding academic performance during the term.',
+        exp_sena_role: 'Systems Technician',
+        exp_sena_desc: 'Systems Technician degree, with training in programming fundamentals, networking and technical support.',
+        projects_title: 'Featured <span>Projects</span>',
+        projects_subtitle: 'A selection of personal and academic projects I have worked on.',
+        proj_mundocracking_desc: 'A link hub for free games, with a simple, organized interface for quickly accessing content.',
+        proj_electroniccontrol_desc: 'Embedded system built from scratch on an Arduino Pro Micro, paired with a Python video game adapted specifically for the controller.',
+        proj_inversionesmatch_desc: 'Interactive product catalog designed for e-commerce, with clear navigation and an appealing visual presentation.',
+        proj_horapprio_desc: 'Time management and academic calendar app, designed to help organize tasks and study schedules.',
+        proj_agrotrace_desc: 'Agrotech platform focused on traceability of agricultural plots, enabling clear tracking of production.',
+        proj_telepatin_desc: 'Web monitoring system for water-propelled rockets, with real-time data visualization during tests.',
+        link_view_project: 'View project',
+        link_view_control: 'View Control',
+        link_view_game: 'View Game',
+        achievements_title: 'Achievements <span>& Hackathons</span>',
+        achievements_subtitle: 'Participation and achievements earned in programming and innovation competitions.',
+        badge_2nd_place: ' 2nd Place',
+        date_col50: 'May 28 – 29, 2026',
+        badge_participant: 'Participant',
+        date_uninorte: 'June 5, 2026',
+        contact_title: "Let's Talk <span>About Your Project</span>",
+        contact_subtitle: "I'm open to new opportunities, collaborations and interesting projects.",
+        footer_text: 'Jose Angel Granados Perez. Santa Marta, Colombia.',
+        nav_toggle_aria: 'Open menu'
+      }
+    };
+
+    function applyLanguage(lang) {
+      const dict = translations[lang] || translations.es;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.textContent = dict[key];
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+
+      document.title = dict.page_title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', dict.page_description);
+
+      navToggle.setAttribute('aria-label', dict.nav_toggle_aria);
+
+      const footerText = document.getElementById('footerText');
+      if (footerText) footerText.textContent = dict.footer_text;
+
+      document.documentElement.setAttribute('lang', lang);
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      try { localStorage.setItem('portfolio-lang', lang); } catch (e) {}
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyLanguage(btn.getAttribute('data-lang')));
+    });
+
+    let savedLang = 'es';
+    try { savedLang = localStorage.getItem('portfolio-lang') || 'es'; } catch (e) {}
+    applyLanguage(savedLang);
   </script>
 
 </body>
