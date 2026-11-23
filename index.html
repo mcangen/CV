@@ -474,23 +474,11 @@
   .chip .ai-icon {
     width: 16px;
     height: 16px;
-    border-radius: 5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     flex-shrink: 0;
   }
 
-  .chip .ai-icon svg {
-    width: 10px;
-    height: 10px;
-    stroke: #0a0a0f;
-    fill: #0a0a0f;
-  }
-
-  .ai-claude { background: #d97757; }
-  .ai-gemini { background: linear-gradient(135deg, #4285f4, #a78bfa); }
-  .ai-chatgpt { background: #10a37f; }
+  /* logo de OpenAI es negro: invertir para fondo oscuro */
+  .chip .ai-chatgpt { filter: invert(1); }
 
   /* ============================================
      EXPERIENCE SECTION
@@ -662,100 +650,6 @@
   }
 
   /* ============================================
-     ACHIEVEMENTS / TIMELINE SECTION
-     ============================================ */
-  .timeline {
-    max-width: 700px;
-    margin: 0 auto;
-    position: relative;
-    padding-left: 32px;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 6px;
-    bottom: 6px;
-    width: 2px;
-    background: linear-gradient(var(--accent-violet), var(--accent-cyan));
-    opacity: 0.4;
-  }
-
-  .timeline-item {
-    position: relative;
-    padding-bottom: 32px;
-  }
-
-  .timeline-item:last-child {
-    padding-bottom: 0;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -32px;
-    top: 4px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--bg-primary);
-    border: 2px solid var(--accent-cyan);
-    box-shadow: 0 0 10px rgba(34, 211, 238, 0.6);
-  }
-
-  .achievement-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 22px 26px;
-    transition: border-color 0.25s ease, transform 0.25s ease;
-  }
-
-  .achievement-card:hover {
-    border-color: var(--border-hover);
-    transform: translateX(4px);
-  }
-
-  .achievement-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .achievement-title {
-    font-weight: 700;
-    font-size: 1.02rem;
-  }
-
-  .badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 999px;
-  }
-
-  .badge-gold {
-    background: rgba(250, 204, 21, 0.12);
-    color: #facc15;
-    border: 1px solid rgba(250, 204, 21, 0.3);
-  }
-
-  .badge-part {
-    background: rgba(34, 211, 238, 0.1);
-    color: var(--accent-cyan);
-    border: 1px solid rgba(34, 211, 238, 0.25);
-  }
-
-  .achievement-date {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-  }
-
-  /* ============================================
      CONTACT / FOOTER SECTION
      ============================================ */
   .contact-section {
@@ -895,15 +789,12 @@
   .exp-list .reveal:nth-child(2) { transition-delay: 0.1s; }
   .exp-list .reveal:nth-child(3) { transition-delay: 0.2s; }
   .exp-list .reveal:nth-child(4) { transition-delay: 0.3s; }
+  .exp-list .reveal:nth-child(5) { transition-delay: 0.4s; }
 
   /* Stagger: tarjetas de proyectos (3 por fila en desktop) */
   .projects-grid .reveal:nth-child(3n+1) { transition-delay: 0s; }
   .projects-grid .reveal:nth-child(3n+2) { transition-delay: 0.1s; }
   .projects-grid .reveal:nth-child(3n)   { transition-delay: 0.2s; }
-
-  /* Stagger: línea de tiempo de logros */
-  .timeline .reveal:nth-child(1) { transition-delay: 0s; }
-  .timeline .reveal:nth-child(2) { transition-delay: 0.15s; }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal {
@@ -993,7 +884,6 @@
         <li><a href="#skills" data-i18n="nav_skills">Habilidades</a></li>
         <li><a href="#experience" data-i18n="nav_experience">Experiencia</a></li>
         <li><a href="#projects" data-i18n="nav_projects">Proyectos</a></li>
-        <li><a href="#achievements" data-i18n="nav_achievements">Logros</a></li>
         <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
@@ -1029,7 +919,7 @@
           </div>
           <div class="meta-chip">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-            <span data-i18n="hero_age">19 años</span>
+            <span data-i18n="hero_age">20 años</span>
           </div>
           <div class="meta-chip">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14M5 8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2M5 8v11a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8M9 12h6M9 16h4"/></svg>
@@ -1068,6 +958,7 @@
           <div class="chip-list">
             <span class="chip"><i class="dev-icon devicon-javascript-plain colored"></i> JavaScript <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
             <span class="chip"><i class="dev-icon devicon-python-plain colored"></i> Python <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
+            <span class="chip"><i class="dev-icon devicon-c-plain colored"></i> C <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
             <span class="chip"><i class="dev-icon devicon-cplusplus-plain colored"></i> C++ <span class="level" data-i18n="level_intermediate">Intermedio</span></span>
             <span class="chip"><i class="dev-icon devicon-typescript-plain colored"></i> TypeScript <span class="level" data-i18n="level_basic_intermediate">Básico-Intermedio</span></span>
           </div>
@@ -1092,9 +983,10 @@
           </h3>
           <div class="chip-list">
             <span class="chip"><i class="dev-icon devicon-git-plain colored"></i> Git <span class="level" data-i18n="level_mid_high">Medio-Alto</span></span>
-            <span class="chip"><span class="ai-icon ai-claude"><svg viewBox="0 0 24 24"><path d="M12 3 4 20h4l1.6-4h4.8L16 20h4L12 3Zm-1 10 1.6-4 1.6 4h-3.2Z"/></svg></span> Claude AI</span>
-            <span class="chip"><span class="ai-icon ai-gemini"><svg viewBox="0 0 24 24"><path d="M12 2C12 8 8 12 2 12c6 0 10 4 10 10 0-6 4-10 10-10-6 0-10-4-10-10Z"/></svg></span> Gemini</span>
-            <span class="chip"><span class="ai-icon ai-chatgpt"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span> ChatGPT</span>
+            <span class="chip"><i class="dev-icon devicon-linux-plain"></i> Linux <span class="level" data-i18n="level_basic">Básico</span></span>
+            <span class="chip"><img class="ai-icon" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1.40.0/icons/claude-color.svg" alt="" width="16" height="16"> Claude AI</span>
+            <span class="chip"><img class="ai-icon" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1.40.0/icons/gemini-color.svg" alt="" width="16" height="16"> Gemini</span>
+            <span class="chip"><img class="ai-icon ai-chatgpt" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1.40.0/icons/openai.svg" alt="" width="16" height="16"> ChatGPT</span>
           </div>
         </div>
 
@@ -1111,6 +1003,20 @@
       <p class="section-subtitle reveal" data-i18n="experience_subtitle">Mi trayectoria académica y roles desempeñados en el ámbito universitario.</p>
 
       <div class="exp-list">
+
+        <div class="experience-card reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role" data-i18n="exp_gideam_role">Integrante del Grupo de Investigación GIDEAM</div>
+              <div class="exp-org"><a href="https://gideam.unimagdalena.edu.co/#inicio" target="_blank" style="color: inherit;">Grupo de Investigación en Desarrollo Electrónico y Aplicaciones Móviles · Universidad del Magdalena</a></div>
+            </div>
+            <span class="exp-date">2026-II</span>
+          </div>
+          <p class="exp-desc" data-i18n="exp_gideam_desc">
+            Grupo categorizado por Minciencias, adscrito a Ingeniería Electrónica. Participo en proyectos que
+            articulan sistemas electrónicos, telecomunicaciones y desarrollo de software aplicados a retos de la región Caribe.
+          </p>
+        </div>
 
         <div class="experience-card reveal">
           <div class="exp-header">
@@ -1180,18 +1086,18 @@
       <p class="section-subtitle reveal" data-i18n="projects_subtitle">Una selección de proyectos personales y académicos en los que he trabajado.</p>
 
       <div class="projects-grid">
-
         <div class="project-card reveal">
           <div class="project-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg>
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           </div>
-          <h3>Mundo Cracking</h3>
-          <p data-i18n="proj_mundocracking_desc">Plataforma de enlaces para juegos gratuitos, con una interfaz simple y organizada para acceder a contenido de forma rápida.</p>
+          <h3>HorApprio</h3>
+          <p data-i18n="proj_horapprio_desc">Aplicación de gestión de tiempo y calendario académico, diseñada para ayudar a organizar tareas y horarios de estudio.</p>
           <div class="tech-tags">
             <span class="tech-tag">HTML</span>
             <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
           </div>
-          <a href="https://mcangen.github.io/Mundo-Cracking/" target="_blank" class="project-link">
+          <a href="https://mcangen.github.io/Horario/" target="_blank" class="project-link">
             <span data-i18n="link_view_project">Ver proyecto</span>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
@@ -1222,32 +1128,16 @@
 
         <div class="project-card reveal">
           <div class="project-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18M3 3v4l7 6v6l4 2v-8l7-6V3"/></svg>
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>
           </div>
-          <h3>Inversiones Match</h3>
-          <p data-i18n="proj_inversionesmatch_desc">Catálogo interactivo de productos pensado para e-commerce, con navegación clara y presentación visual atractiva.</p>
+          <h3>labDigital-JGFPGA</h3>
+          <p data-i18n="proj_labdigital_desc">Laboratorio digital en el navegador: escribe VHDL o dibuja el circuito, simúlalo sobre una Basys 3 virtual y genera el bitstream sin instalar Vivado.</p>
           <div class="tech-tags">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-          </div>
-          <a href="https://github.com/mcangen/InversionesMach" target="_blank" class="project-link">
-            <span data-i18n="link_view_project">Ver proyecto</span>
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
-          </a>
-        </div>
-
-        <div class="project-card reveal">
-          <div class="project-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          </div>
-          <h3>HorApprio</h3>
-          <p data-i18n="proj_horapprio_desc">Aplicación de gestión de tiempo y calendario académico, diseñada para ayudar a organizar tareas y horarios de estudio.</p>
-          <div class="tech-tags">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">VHDL</span>
             <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Python</span>
           </div>
-          <a href="https://mcangen.github.io/Horario/" target="_blank" class="project-link">
+          <a href="https://gideam.unimagdalena.edu.co/labdigital/" target="_blank" class="project-link">
             <span data-i18n="link_view_project">Ver proyecto</span>
             <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
@@ -1287,38 +1177,20 @@
           </a>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       ACHIEVEMENTS SECTION
-       ============================================ -->
-  <section id="achievements">
-    <div class="container">
-      <h2 class="section-title reveal" data-i18n-html="achievements_title">Reconocimientos <span>& Hackathons</span></h2>
-      <p class="section-subtitle reveal" data-i18n="achievements_subtitle">Participación y logros obtenidos en competencias de programación e innovación.</p>
-
-      <div class="timeline">
-
-        <div class="timeline-item reveal">
-          <div class="achievement-card">
-            <div class="achievement-header">
-              <span class="achievement-title">Col5.0</span>
-              <span class="badge badge-gold" data-i18n="badge_2nd_place"> 2do Puesto</span>
-            </div>
-            <div class="achievement-date" data-i18n="date_col50">28 – 29 de Mayo, 2026</div>
+        <div class="project-card reveal">
+          <div class="project-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg>
           </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="achievement-card">
-            <div class="achievement-header">
-              <span class="achievement-title">Hackathon UniNorte</span>
-              <span class="badge badge-part" data-i18n="badge_participant">Participante</span>
-            </div>
-            <div class="achievement-date" data-i18n="date_uninorte">5 de Junio, 2026</div>
+          <h3>Mundo Cracking</h3>
+          <p data-i18n="proj_mundocracking_desc">Plataforma de enlaces para juegos gratuitos, con una interfaz simple y organizada para acceder a contenido de forma rápida.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
           </div>
+          <a href="https://mcangen.github.io/Mundo-Cracking/" target="_blank" class="project-link">
+            <span data-i18n="link_view_project">Ver proyecto</span>
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          </a>
         </div>
 
       </div>
@@ -1421,12 +1293,11 @@
         nav_skills: 'Habilidades',
         nav_experience: 'Experiencia',
         nav_projects: 'Proyectos',
-        nav_achievements: 'Logros',
         nav_contact: 'Contacto',
         hero_available: 'Disponible para proyectos',
         hero_role: 'Desarrollador de Software · Frontend & Backend',
         hero_location: 'Santa Marta, Colombia',
-        hero_age: '19 años',
+        hero_age: '20 años',
         hero_langs: 'Español (Nativo) · Inglés (Intermedio)',
         hero_cta_projects: 'Ver Proyectos',
         hero_cta_resume: 'Descargar CV',
@@ -1436,11 +1307,14 @@
         skills_cat_languages: 'Lenguajes de Programación',
         skills_cat_backend: 'Backend & Bases de Datos',
         skills_cat_tools: 'Herramientas',
+        level_basic: 'Básico',
         level_intermediate: 'Intermedio',
         level_basic_intermediate: 'Básico-Intermedio',
         level_mid_high: 'Medio-Alto',
         experience_title: 'Formación <span>& Experiencia</span>',
         experience_subtitle: 'Mi trayectoria académica y roles desempeñados en el ámbito universitario.',
+        exp_gideam_role: 'Integrante del Grupo de Investigación GIDEAM',
+        exp_gideam_desc: 'Grupo categorizado por Minciencias, adscrito a Ingeniería Electrónica. Participo en proyectos que articulan sistemas electrónicos, telecomunicaciones y desarrollo de software aplicados a retos de la región Caribe.',
         exp_monitor_role: 'Monitor Académico de Programación',
         exp_monitor_desc: 'Liderazgo de sesiones instructivas de programación, apoyo directo a estudiantes en el desarrollo de lógica de programación y resolución de dudas técnicas en distintos lenguajes y paradigmas.',
         exp_student_role: 'Estudiante de Ingeniería Electrónica',
@@ -1454,19 +1328,13 @@
         projects_subtitle: 'Una selección de proyectos personales y académicos en los que he trabajado.',
         proj_mundocracking_desc: 'Plataforma de enlaces para juegos gratuitos, con una interfaz simple y organizada para acceder a contenido de forma rápida.',
         proj_electroniccontrol_desc: 'Sistema embebido en Arduino Pro Micro desarrollado desde cero, junto a un videojuego en Python adaptado especialmente para el control.',
-        proj_inversionesmatch_desc: 'Catálogo interactivo de productos pensado para e-commerce, con navegación clara y presentación visual atractiva.',
         proj_horapprio_desc: 'Aplicación de gestión de tiempo y calendario académico, diseñada para ayudar a organizar tareas y horarios de estudio.',
         proj_agrotrace_desc: 'Plataforma agrotech enfocada en la trazabilidad de lotes agrícolas, permitiendo un seguimiento claro de la producción.',
+        proj_labdigital_desc: 'Laboratorio digital en el navegador: escribe VHDL o dibuja el circuito, simúlalo sobre una Basys 3 virtual y genera el bitstream sin instalar Vivado.',
         proj_telepatin_desc: 'Sistema web de monitoreo para cohetes hidropulsados, con visualización de datos en tiempo real durante las pruebas.',
         link_view_project: 'Ver proyecto',
         link_view_control: 'Ver Control',
         link_view_game: 'Ver Juego',
-        achievements_title: 'Reconocimientos <span>& Hackathons</span>',
-        achievements_subtitle: 'Participación y logros obtenidos en competencias de programación e innovación.',
-        badge_2nd_place: ' 2do Puesto',
-        date_col50: '28 – 29 de Mayo, 2026',
-        badge_participant: 'Participante',
-        date_uninorte: '5 de Junio, 2026',
         contact_title: 'Hablemos <span>de tu Proyecto</span>',
         contact_subtitle: 'Estoy abierto a nuevas oportunidades, colaboraciones y proyectos interesantes.',
         footer_text: 'Jose Angel Granados Perez. Santa Marta, Colombia.',
@@ -1478,12 +1346,11 @@
         nav_skills: 'Skills',
         nav_experience: 'Experience',
         nav_projects: 'Projects',
-        nav_achievements: 'Achievements',
         nav_contact: 'Contact',
         hero_available: 'Available for projects',
         hero_role: 'Software Developer · Frontend & Backend',
         hero_location: 'Santa Marta, Colombia',
-        hero_age: '19 years old',
+        hero_age: '20 years old',
         hero_langs: 'Spanish (Native) · English (Intermediate)',
         hero_cta_projects: 'View Projects',
         hero_cta_resume: 'Download CV',
@@ -1493,11 +1360,14 @@
         skills_cat_languages: 'Programming Languages',
         skills_cat_backend: 'Backend & Databases',
         skills_cat_tools: 'Tools',
+        level_basic: 'Basic',
         level_intermediate: 'Intermediate',
         level_basic_intermediate: 'Basic-Intermediate',
         level_mid_high: 'Mid-High',
         experience_title: 'Education <span>& Experience</span>',
         experience_subtitle: 'My academic path and roles held within the university.',
+        exp_gideam_role: 'Member of the GIDEAM Research Group',
+        exp_gideam_desc: 'Minciencias-ranked research group attached to Electronic Engineering. I take part in projects that combine electronic systems, telecommunications and software development applied to challenges in the Caribbean region.',
         exp_monitor_role: 'Academic Programming Monitor',
         exp_monitor_desc: 'Led instructional programming sessions, provided direct support to students in developing programming logic and resolving technical questions across different languages and paradigms.',
         exp_student_role: 'Electronic Engineering Student',
@@ -1511,19 +1381,13 @@
         projects_subtitle: 'A selection of personal and academic projects I have worked on.',
         proj_mundocracking_desc: 'A link hub for free games, with a simple, organized interface for quickly accessing content.',
         proj_electroniccontrol_desc: 'Embedded system built from scratch on an Arduino Pro Micro, paired with a Python video game adapted specifically for the controller.',
-        proj_inversionesmatch_desc: 'Interactive product catalog designed for e-commerce, with clear navigation and an appealing visual presentation.',
         proj_horapprio_desc: 'Time management and academic calendar app, designed to help organize tasks and study schedules.',
         proj_agrotrace_desc: 'Agrotech platform focused on traceability of agricultural plots, enabling clear tracking of production.',
+        proj_labdigital_desc: 'In-browser digital lab: write VHDL or draw the circuit, simulate it on a virtual Basys 3 and generate the bitstream without installing Vivado.',
         proj_telepatin_desc: 'Web monitoring system for water-propelled rockets, with real-time data visualization during tests.',
         link_view_project: 'View project',
         link_view_control: 'View Control',
         link_view_game: 'View Game',
-        achievements_title: 'Achievements <span>& Hackathons</span>',
-        achievements_subtitle: 'Participation and achievements earned in programming and innovation competitions.',
-        badge_2nd_place: ' 2nd Place',
-        date_col50: 'May 28 – 29, 2026',
-        badge_participant: 'Participant',
-        date_uninorte: 'June 5, 2026',
         contact_title: "Let's Talk <span>About Your Project</span>",
         contact_subtitle: "I'm open to new opportunities, collaborations and interesting projects.",
         footer_text: 'Jose Angel Granados Perez. Santa Marta, Colombia.',
